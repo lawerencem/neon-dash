@@ -34,6 +34,7 @@ module.exports = function (config) {
         junitReporter: {
             outputDir: 'reports/tests'
         },
+        browserNoActivityTimeout: 100000,
 	remapIstanbulReporter: {
 	    reports: {
 		html: 'reports/coverage',
@@ -46,8 +47,8 @@ module.exports = function (config) {
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
-        autoWatch: true,
-        browsers: ['Chrome', 'PhantomJS'],
+        autoWatch: false,
+        browsers: ['ChromeHeadless'],
         singleRun: true,
         client: {
             captureConsole: true,
