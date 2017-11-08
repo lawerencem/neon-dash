@@ -6,7 +6,6 @@ import {
     MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatTabsModule,
     MatToolbarModule, MatTooltipModule
 } from '@angular/material';
-import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 
 const MD_MODULES = [
     MatButtonModule,
@@ -37,12 +36,7 @@ const MD_MODULES = [
     declarations: [],
     imports: MD_MODULES,
     exports: MD_MODULES,
-    providers: [
-        {
-            provide: MATERIAL_COMPATIBILITY_MODE,
-            useValue: true
-        }
-    ],
+    providers: [],
     entryComponents: [],
     bootstrap: []
 })
