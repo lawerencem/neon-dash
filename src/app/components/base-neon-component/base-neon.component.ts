@@ -95,7 +95,7 @@ export abstract class BaseNeonComponent implements OnInit,
         // Make sure the empty field has non-null values
         this.emptyField.columnName = '';
         this.emptyField.prettyName = '';
-    };
+    }
 
     /**
      * Initializes the visualization.
@@ -126,7 +126,7 @@ export abstract class BaseNeonComponent implements OnInit,
         this.exportId = (this.isExportable ? this.exportService.register(this.doExport) : null);
         this.initializing = false;
         this.postInit();
-    };
+    }
 
     /**
      * Method for anything that needs to be done once the visualization has been initialized
@@ -227,11 +227,11 @@ export abstract class BaseNeonComponent implements OnInit,
 
     doExport() {
         return this.export();
-    };
+    }
 
     protected enableRedrawAfterResize(enable: boolean) {
         this.redrawAfterResize = enable;
-    };
+    }
 
     onResizeStop() {
         if (this.redrawAfterResize) {
@@ -272,7 +272,7 @@ export abstract class BaseNeonComponent implements OnInit,
             $scope.element.find(element).off('resize', resize);
         }); */
         this.subNgOnDestroy();
-    };
+    }
 
     /**
      * Load all the database metadata, then call initTables()
@@ -293,7 +293,7 @@ export abstract class BaseNeonComponent implements OnInit,
 
             this.initTables();
         }
-    };
+    }
 
     /**
      * Load all the table metadata, then call initFields()
@@ -313,7 +313,7 @@ export abstract class BaseNeonComponent implements OnInit,
             }
             this.initFields();
         }
-    };
+    }
 
     /**
      * Initialize all the field metadata
@@ -331,7 +331,7 @@ export abstract class BaseNeonComponent implements OnInit,
 
         this.onUpdateFields();
         //this.changeDetection.detectChanges();
-    };
+    }
 
     /**
      * Called when any field metadata changes.
@@ -407,7 +407,7 @@ export abstract class BaseNeonComponent implements OnInit,
                 console.log('filter failed to set');
             });
         this.changeDetection.detectChanges();
-    };
+    }
 
     /**
      * Create a title for a query
@@ -434,7 +434,7 @@ export abstract class BaseNeonComponent implements OnInit,
                 : '');
         }
         return title;
-    };
+    }
 
     /**
      * Execute the Neon query chain.
@@ -540,7 +540,7 @@ export abstract class BaseNeonComponent implements OnInit,
                 this.changeDetection.detectChanges();
             }
         });
-    };
+    }
 
     /**
      * Get field object from the key into the config options
@@ -548,8 +548,8 @@ export abstract class BaseNeonComponent implements OnInit,
     findFieldObject(bindingKey: string, mappingKey?: string): FieldMetaData {
         let me = this;
         let find = function(name) {
-            return _.find(me.meta.fields, function(field) {
-                return field['columnName'] === name;
+            return _.find(me.meta.fields, function(fieldMD) {
+                return fieldMD['columnName'] === name;
             });
         };
 
@@ -563,11 +563,11 @@ export abstract class BaseNeonComponent implements OnInit,
         }
 
         return field || this.datasetService.createBlankField();
-    };
+    }
 
     getMapping(key: string): string {
         return this.datasetService.getMapping(this.meta.database.name, this.meta.table.name, key);
-    };
+    }
 
     /**
      * Called after the filters in the filter service have changed.
@@ -600,7 +600,7 @@ export abstract class BaseNeonComponent implements OnInit,
     handleChangeDatabase() {
         this.initTables();
         this.logChangeAndStartQueryChain(); // ('database', this.active.database.name);
-    };
+    }
 
     /**
      * Handles changes in the active table
@@ -608,7 +608,7 @@ export abstract class BaseNeonComponent implements OnInit,
     handleChangeTable() {
         this.initFields();
         this.logChangeAndStartQueryChain(); // ('table', this.active.table.name);
-    };
+    }
 
     /**
      * If not initializing, calls executeQueryChain();
@@ -618,7 +618,7 @@ export abstract class BaseNeonComponent implements OnInit,
         if (!this.initializing) {
             this.executeQueryChain();
         }
-    };
+    }
 
     /**
      * Called when a filter has been removed
@@ -673,7 +673,7 @@ export abstract class BaseNeonComponent implements OnInit,
                 console.error('error removing filter');
             }, this.messenger);
         this.changeDetection.detectChanges();
-    };
+    }
 
     getButtonText() {
         return '';

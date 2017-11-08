@@ -49,13 +49,13 @@ export class TextCloud {
             }
             return item;
         });
-    };
+    }
 
     private colorIncrement(color: ColorOptions, range: number): number[] {
         return this.toRGB(color.end).map((n, i) => {
             return (n - this.toRGB(color.start)[i]) / range;
         });
-    };
+    }
 
     // Converts hex to an RGB array
     private toRGB(code: string): number[] {
@@ -64,7 +64,7 @@ export class TextCloud {
         }
         let hex = /(\w{2})(\w{2})(\w{2})/.exec(code);
         return [parseInt(hex[1], 16), parseInt(hex[2], 16), parseInt(hex[3], 16)];
-    };
+    }
 
     private tagColor(color: ColorOptions, increment: number[], weighting: number) {
         let rgb = this.toRGB(color.start).map((n, i) => {
@@ -79,7 +79,7 @@ export class TextCloud {
             return ref;
         });
         return this.toHex(rgb);
-    };
+    }
 
     // Converts an RGB array to hex
     private toHex(ary: number[]): string {
@@ -88,20 +88,8 @@ export class TextCloud {
             hex = (hex.length === 1) ? '0' + hex : hex;
             return hex;
         }).join('');
-    };
-
-}
-
-export class TextCloudOptions {
-    size: SizeOptions = new SizeOptions();
-    color: ColorOptions;
-
-    constructor(size?: SizeOptions, color?: ColorOptions) {
-        this.size = size || new SizeOptions();
-        if (color) {
-            this.color = color;
-        }
     }
+
 }
 
 export class SizeOptions {
@@ -113,6 +101,18 @@ export class SizeOptions {
         this.start = start || 14;
         this.end = end || 18;
         this.unit = unit || 'pt';
+    }
+}
+
+export class TextCloudOptions {
+    size: SizeOptions = new SizeOptions();
+    color: ColorOptions;
+
+    constructor(size?: SizeOptions, color?: ColorOptions) {
+        this.size = size || new SizeOptions();
+        if (color) {
+            this.color = color;
+        }
     }
 }
 

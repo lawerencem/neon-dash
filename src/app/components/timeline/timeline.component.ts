@@ -109,15 +109,15 @@ export class TimelineComponent extends BaseNeonComponent implements OnInit,
 
     subNgOnInit() {
         this.timelineChart = new TimelineSelectorChart(this, this.svg, this.timelineData);
-    };
+    }
 
     postInit() {
         this.executeQueryChain();
-    };
+    }
 
     subNgOnDestroy() {
 
-    };
+    }
 
     subGetBindings(bindings: any) {
         bindings.dateField = this.active.dateField.columnName;
@@ -170,11 +170,11 @@ export class TimelineComponent extends BaseNeonComponent implements OnInit,
 
     getOptionFromConfig(field) {
         return this.optionsFromConfig[field];
-    };
+    }
 
     onUpdateFields() {
         this.active.dateField = this.findFieldObject('dateField', neonMappings.DATE);
-    };
+    }
 
     addLocalFilter(key: string, startDate: Date, endDate: Date, local?: boolean) {
         try {
@@ -187,7 +187,7 @@ export class TimelineComponent extends BaseNeonComponent implements OnInit,
         } catch (e) {
             // Ignore potential date format errors
         }
-    };
+    }
 
     onTimelineSelection(startDate: Date, endDate: Date): void {
         let filter = {
@@ -215,7 +215,7 @@ export class TimelineComponent extends BaseNeonComponent implements OnInit,
             return neon.query.and.apply(neon.query, filterClauses);
         }
         return null;
-    };
+    }
 
     getFilterText(filter) {
         // I.E. TIMELINE - EARTHQUAKES: 8 AUG 2015 TO 20 DEC 2015
@@ -285,7 +285,7 @@ export class TimelineComponent extends BaseNeonComponent implements OnInit,
            query.where(neon.query.where(this.meta.unsharedFilterField.columnName, '=', this.meta.unsharedFilterValue));
         }
         return query.aggregate(neon.query['COUNT'], '*', 'value');
-    };
+    }
 
     getFiltersToIgnore() {
         let database = this.meta.database.name;
@@ -480,14 +480,14 @@ export class TimelineComponent extends BaseNeonComponent implements OnInit,
 
     handleChangeDateField() {
         this.logChangeAndStartQueryChain(); // ('dateField', this.active.dateField.columnName);
-    };
+    }
 
     logChangeAndStartQueryChain() { // (option: string, value: any, type?: string) {
         // this.logChange(option, value, type);
         if (!this.initializing) {
             this.executeQueryChain();
         }
-    };
+    }
 
     // Get filters and format for each call in HTML
     getCloseableFilters() {
@@ -500,15 +500,15 @@ export class TimelineComponent extends BaseNeonComponent implements OnInit,
         } else {
             return [];
         }
-    };
+    }
 
     getFilterTitle(value: string) {
         return this.active.dateField.columnName + ' = ' + value;
-    };
+    }
 
     getRemoveFilterTooltip(value: string) {
         return 'Delete Filter ' + this.getFilterTitle(value);
-    };
+    }
 
     unsharedFilterChanged() {
         // Update the data
@@ -523,7 +523,7 @@ export class TimelineComponent extends BaseNeonComponent implements OnInit,
     removeFilter(/*value: string*/) {
         this.filters = [];
         if (this.timelineChart) {
-        this.timelineChart.clearBrush();
+            this.timelineChart.clearBrush();
+        }
     }
-}
 }

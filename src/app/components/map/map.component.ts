@@ -172,7 +172,7 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
         };
         this.queryTitle = 'Map';
         //this.addEmptyLayer();
-    };
+    }
 
     subNgOnInit() {
 
@@ -262,11 +262,11 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
             // This must be called to stop Cesium's event loop
             this.cesiumViewer.destroy();
         }
-    };
+    }
 
     getOptionFromConfig(field) {
         return this.optionsFromConfig[field];
-    };
+    }
 
     subAddEmptyLayer() {
         this.active.layers.push({
@@ -497,7 +497,7 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
         if (!layer.title || layer.title === '') {
             layer.title = 'New Layer';
         }
-    };
+    }
 
     findFieldObject(layerIndex: number, bindingKey: string, mappingKey?: string): FieldMetaData {
         // If there are no layers or the index is past the end of the layers in the config, default to the original
@@ -508,8 +508,8 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
 
         let me = this;
         let find = function(name) {
-            return _.find(me.meta.layers[layerIndex].fields, function(field) {
-                return field['columnName'] === name;
+            return _.find(me.meta.layers[layerIndex].fields, function(fieldMD) {
+                return fieldMD['columnName'] === name;
             });
         };
 
@@ -522,11 +522,11 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
             fieldsByLayer: fieldsByLayer,
             filterName: name
         };
-    };
+    }
 
     addLocalFilter(filter) {
         this.filters[0] = filter;
-    };
+    }
 
     createNeonFilterClauseEquals(_databaseAndTableName: {}, latLonFieldNames: string[]) {
         let filterClauses = [];
@@ -545,7 +545,7 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
         //let endDatePlusOneDate = new Date(endDatePlusOne);
         //filterClauses[1] = neon.query.where(fieldName, '<', endDatePlusOneDate);
         return neon.query.and.apply(neon.query, filterClauses);
-    };
+    }
 
     getFilterTextByFields(fieldsByLayer: any[]) {
         if (fieldsByLayer.length === 1) {
@@ -619,7 +619,7 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
         query = query.where(whereClause);
         query = query.limit(this.active.limit);
         return query;
-    };
+    }
 
     isNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
@@ -795,28 +795,28 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
 
     handleChangeDateField(layerIndex) {
         this.logChangeAndStartQueryChain(layerIndex);
-    };
+    }
 
     handleChangeSizeField(layerIndex) {
         this.logChangeAndStartQueryChain(layerIndex);
-    };
+    }
 
     handleChangeColorField(layerIndex) {
         this.logChangeAndStartQueryChain(layerIndex);
-    };
+    }
 
     handleChangeLatitudeField(layerIndex) {
         this.logChangeAndStartQueryChain(layerIndex);
-    };
+    }
 
     handleChangeLongitudeField(layerIndex) {
         this.logChangeAndStartQueryChain(layerIndex);
-    };
+    }
 
     handleChangeAndFilters() {
         this.logChangeAndStartAllQueryChain(); // ('andFilters', this.active.andFilters, 'button');
         // this.updateNeonFilter();
-    };
+    }
 
     // Get filters and format for each call in HTML
     getCloseableFilters() {
@@ -830,7 +830,7 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
         } else {
             return [];
         }
-    };
+    }
 
     getFilterTitle(): string {
         let title = 'Map Filter';
@@ -838,7 +838,7 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
             title += ' *Filter has been altered outside of Map visualization and selection rectange may not accurately represent filter.';
         }
         return title;
-    };
+    }
 
     getFilterCloseText(value: string) {
         let v = value;
@@ -846,11 +846,11 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
             v += '*';
         }
         return v;
-    };
+    }
 
     getRemoveFilterTooltip() {
         return 'Delete ' + this.getFilterTitle();
-    };
+    }
 
     removeFilter(/*value*/): void {
         this.filters = [];
@@ -861,7 +861,7 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
             this.removeLocalFilterFromLocalAndNeon(i, value, true, false);
         }
         this.removeFilterBox();
-    };
+    }
 
     toggleFilter(index: number): void {
         this.filterVisible[index] = !(this.filterVisible[index]);
@@ -928,5 +928,5 @@ export class MapComponent extends BaseLayeredNeonComponent implements OnInit,
             this.removeFilterBox();
         }
 
-    };*/
+    }*/
 }

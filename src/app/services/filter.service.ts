@@ -34,7 +34,7 @@ export class FilterService {
     constructor(private errorNotificationService: ErrorNotificationService, private datasetService: DatasetService) {
         this.messenger = new neon.eventing.Messenger();
         this.filters = [];
-    };
+    }
 
     /*
      * Gets all the filters from the server.
@@ -55,7 +55,7 @@ export class FilterService {
                 this.errorNotificationService.showErrorMessage(null, response.responseJSON.error);
             }
         });
-    };
+    }
 
     /*
      * Adds a filter with the given database, table, and attributes. If exists, the filter gets replaced.
@@ -87,7 +87,7 @@ export class FilterService {
             this.addNewFilter(messenger, relations, createFilterClauseFunction,
                 this.getFilterNameString(filterName, relations), successCallback, errorCallback);
         }
-    };
+    }
 
     /*
      * Removes a filter with the given database, table, and attributes.
@@ -114,7 +114,7 @@ export class FilterService {
         } else if (successCallback) {
             successCallback(null);
         }
-    };
+    }
 
     replaceFilterById(messenger: neon.eventing.Messenger, database: string, table: string, fields: string[],
         createFilterClauseFunction: (dbAndTableName: {}, fieldNames: any) => any, filterName: any, id: string,
@@ -184,7 +184,7 @@ export class FilterService {
                 successCallback();
             }
         }, errorCallback);
-    };
+    }
 
     /*
      * Removes the filters with the given filter keys.
@@ -199,7 +199,7 @@ export class FilterService {
         } else if (successCallback) {
             successCallback(null);
         }
-    };
+    }
 
     /*
      * Finds the filter key that matches the given database, table, and filter clause.
@@ -221,7 +221,7 @@ export class FilterService {
             }
         }
         return undefined;
-    };
+    }
 
     /*
      * Returns the list of filters.
@@ -266,7 +266,7 @@ export class FilterService {
         });
 
         return filters;
-    };
+    }
 
     /*
      * Checks if the two filter clauses are equal.
@@ -299,7 +299,7 @@ export class FilterService {
             }
         }
         return false;
-    };
+    }
 
     /*
      * Returns whether the given filter has a single where clause.
@@ -309,7 +309,7 @@ export class FilterService {
      */
     hasSingleClause(filter: any): boolean {
         return filter.filter.whereClause.type === 'where';
-    };
+    }
 
     /*
      * Returns whether the given filter has a multiple where clauses.
@@ -319,7 +319,7 @@ export class FilterService {
      */
     hasMultipleClauses(filter: any): boolean {
         return filter.filter.whereClause.type === 'and' || filter.filter.whereClauses.type === 'or';
-    };
+    }
 
     /*
      * If the given filter has multiple clauses, it returns the number of clauses it has. Otherwise, returns 0.
@@ -329,7 +329,7 @@ export class FilterService {
      */
     getMultipleClausesLength(filter: any): number {
         return this.hasMultipleClauses(filter) ? filter.filter.whereClause.whereClauses.length : 0;
-    };
+    }
 
     /*
      * Replaces the filter for the relations.
@@ -380,7 +380,7 @@ export class FilterService {
             };
             replaceNextFilter();
         }, errorCallback);
-    };
+    }
 
     /**
      * Adds filters for the given relations.
@@ -428,7 +428,7 @@ export class FilterService {
             });
             addNextFilter();
         }, errorCallback);
-    };
+    }
 
     /**
      * Removes filters for all the given filter keys.
@@ -455,7 +455,7 @@ export class FilterService {
                 successCallback(null);
             }
         }, errorCallback);
-    };
+    }
 
     /**
      * Creates and returns a filter on the given table and field(s) using the given callback.
@@ -510,7 +510,7 @@ export class FilterService {
         }
 
         return undefined;
-    };
+    }
 
     /**
      * Returns the list of field names or arrays based on the data contained within the array of fields in the given
@@ -562,7 +562,7 @@ export class FilterService {
         };
 
         return getArgumentFieldsListHelper([], relationFieldsList);
-    };
+    }
 
     /*
      * Returns a filter name based on the given name and relations.
@@ -593,7 +593,7 @@ export class FilterService {
         } else {
             return filterName;
         }
-    };
+    }
 
     /*
      * Returns a list of filter keys that belong to the given relations.
@@ -614,5 +614,5 @@ export class FilterService {
             keys = keys.concat(this.getFilters(relation['database'], relation['table'], attrs).map(filter => filter.id));
         });
         return keys;
-    };
+    }
 }

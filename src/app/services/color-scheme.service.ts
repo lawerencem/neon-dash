@@ -16,6 +16,97 @@
 import { Injectable } from '@angular/core';
 
 /**
+ * General color class.
+ * This class can provide colors in a hex string, RGB formatted, or in RGB percent.
+ */
+export class Color {
+    private red: number;
+    private green: number;
+    private blue: number;
+
+    /**
+     * Create a color object from an array of RGB values.
+     * The array must have 3 elements in it
+     * @param {number[]} rgb
+     * @return {Color}
+     */
+    static fromRgbArray(rgb: number[]): Color {
+        if (rgb == null || rgb.length !== 3) {
+            return null;
+        }
+        return new Color(rgb[0], rgb[1], rgb[2]);
+    }
+
+    constructor(r: number, g: number, b: number) {
+        this.red = r;
+        this.green = g;
+        this.blue = b;
+    }
+
+    private getBase255(value: number) {
+        return value;
+    }
+
+    private getBase1(value: number) {
+        return value / 255;
+    }
+
+    private getHex(value: number) {
+        return value.toString(16);
+    }
+
+    /**
+     * Get the 'inactive' color, aka the RGBA string with an alpha of 0.3
+     * @return {string}
+     */
+    getInactiveRgba(): string {
+        return this.toRgba(0.3);
+    }
+
+    /**
+     * Get the color as a string of RGB percentages
+     * @return {string}
+     */
+    toPercentages(): string {
+        return '' + this.getBase1(this.red) + ',' +
+            this.getBase1(this.green) + ',' +
+            this.getBase1(this.blue);
+    }
+
+    /**
+     * Get the color as a rgb(0,0,0) string
+     * @return {string}
+     */
+    toRgb(): string {
+        return 'rgb(' + this.getBase255(this.red) + ',' +
+            this.getBase255(this.green) + ',' +
+            this.getBase255(this.blue) + ')';
+    }
+
+    /**
+     * Get the color as a rgba(0,0,0,a) string
+     * @param a alpha value (0-1)
+     * @return {string}
+     */
+    toRgba(a: number): string {
+        return 'rgba(' + this.getBase255(this.red) + ',' +
+            this.getBase255(this.green) + ',' +
+            this.getBase255(this.blue) + ',' +
+            a + ')';
+    }
+
+    /**
+     * Get the color as a '#RRGGBB' string
+     * @return {string}
+     */
+    toHexString(): string {
+        return '#' + this.getHex(this.red) +
+            this.getHex(this.green) +
+            this.getHex(this.blue);
+    }
+}
+
+/**
  * A set of colors, used to keep track of which values map to which colors
  */
 export class ColorSet {
@@ -143,96 +234,5 @@ export class ColorSchemeService {
      */
     getColorSet(set: string): ColorSet {
         return this.colorMaps.get(set);
-    }
-}
-
-/**
- * General color class.
- * This class can provide colors in a hex string, RGB formatted, or in RGB percent.
- */
-export class Color {
-    private red: number;
-    private green: number;
-    private blue: number;
-
-    /**
-     * Create a color object from an array of RGB values.
-     * The array must have 3 elements in it
-     * @param {number[]} rgb
-     * @return {Color}
-     */
-    static fromRgbArray(rgb: number[]): Color {
-        if (rgb == null || rgb.length !== 3) {
-            return null;
-        }
-        return new Color(rgb[0], rgb[1], rgb[2]);
-    }
-
-    constructor(r: number, g: number, b: number) {
-        this.red = r;
-        this.green = g;
-        this.blue = b;
-    }
-
-    private getBase255(value: number) {
-        return value;
-    }
-
-    private getBase1(value: number) {
-        return value / 255;
-    }
-
-    private getHex(value: number) {
-        return value.toString(16);
-    }
-
-    /**
-     * Get the 'inactive' color, aka the RGBA string with an alpha of 0.3
-     * @return {string}
-     */
-    getInactiveRgba(): string {
-        return this.toRgba(0.3);
-    }
-
-    /**
-     * Get the color as a string of RGB percentages
-     * @return {string}
-     */
-    toPercentages(): string {
-        return '' + this.getBase1(this.red) + ',' +
-            this.getBase1(this.green) + ',' +
-            this.getBase1(this.blue);
-    }
-
-    /**
-     * Get the color as a rgb(0,0,0) string
-     * @return {string}
-     */
-    toRgb(): string {
-        return 'rgb(' + this.getBase255(this.red) + ',' +
-            this.getBase255(this.green) + ',' +
-            this.getBase255(this.blue) + ')';
-    }
-
-    /**
-     * Get the color as a rgba(0,0,0,a) string
-     * @param a alpha value (0-1)
-     * @return {string}
-     */
-    toRgba(a: number): string {
-        return 'rgba(' + this.getBase255(this.red) + ',' +
-            this.getBase255(this.green) + ',' +
-            this.getBase255(this.blue) + ',' +
-            a + ')';
-    }
-
-    /**
-     * Get the color as a '#RRGGBB' string
-     * @return {string}
-     */
-    toHexString(): string {
-        return '#' + this.getHex(this.red) +
-            this.getHex(this.green) +
-            this.getHex(this.blue);
     }
 }

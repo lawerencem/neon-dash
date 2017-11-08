@@ -219,7 +219,7 @@ export class DatasetSelectorComponent implements OnInit, OnDestroy {
             // Wait to update the layout until after we finish the dataset updates.
             me.finishConnectToPreset(dataset, loadDashboardState);
         });
-    };
+    }
 
     finishConnectToPreset(dataset: Dataset, loadDashboardState: boolean) {
         this.datasetService.setActiveDataset(dataset);
@@ -263,7 +263,7 @@ export class DatasetSelectorComponent implements OnInit, OnDestroy {
         this.onGridItemsChanged.emit(this.layouts[layoutName].length);
         this.onActiveDatasetChanged.emit(this.activeDataset);
         this.parameterService.addFiltersFromUrl(!loadDashboardState);
-    };
+    }
 
 
     /**
@@ -322,7 +322,7 @@ export class DatasetSelectorComponent implements OnInit, OnDestroy {
 
         this.onGridItemsChanged.emit(this.customVisualizations.length);
         this.parameterService.addFiltersFromUrl();
-    };
+    }
 
     /**
      * Selection event for the custom dataset popup.
@@ -330,7 +330,7 @@ export class DatasetSelectorComponent implements OnInit, OnDestroy {
     selectCustom() {
         // Removed call to xdata logger library
         // Custom connection dialog is not yet implemented.
-    };
+    }
 
     /**
      * Creates and returns a new custom dataset object using the user configuration saved in the global variables.
@@ -368,7 +368,7 @@ export class DatasetSelectorComponent implements OnInit, OnDestroy {
         });
 
         return dataset;
-    };
+    }
 
     /**
      * Sets the active dataset to the databases and tables in the list of custom databases
@@ -404,5 +404,5 @@ export class DatasetSelectorComponent implements OnInit, OnDestroy {
 
         // TODO: Manage the custom connection modal.
         // $element.find(".modal").modal("hide");
-    };
+    }
 }

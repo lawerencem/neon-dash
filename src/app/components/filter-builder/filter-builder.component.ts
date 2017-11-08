@@ -70,19 +70,19 @@ export class FilterBuilderComponent extends BaseNeonComponent implements OnInit,
         this.active.operators.push({ value: 'not contains', prettyName: 'not contains' });
         this.queryTitle = 'Filter Builder';
         this.isExportable = false;
-    };
+    }
 
     subNgOnInit() {
         this.addBlankWhereClause();
-    };
+    }
 
     postInit() {
         //Do nothing
-    };
+    }
 
     subNgOnDestroy() {
         //Do nothing
-    };
+    }
 
     getExportFields() {
         //Do nothing.  Doesn't export nor does this visualization register to export
@@ -92,11 +92,11 @@ export class FilterBuilderComponent extends BaseNeonComponent implements OnInit,
 
     getOptionFromConfig(field) {
         return this.optionsFromConfig[field];
-    };
+    }
 
     onUpdateFields() {
         //TODO pull in filters from previous filter builder??  maybe?
-    };
+    }
 
     subGetBindings(bindings: any) {
         // TODO
@@ -113,7 +113,7 @@ export class FilterBuilderComponent extends BaseNeonComponent implements OnInit,
             active: false
         };
         this.active.whereClauses.push(clause);
-    };
+    }
 
     removeClause(i) {
         this.active.whereClauses.splice(i, 1);
@@ -251,8 +251,7 @@ export class FilterBuilderComponent extends BaseNeonComponent implements OnInit,
                 onFailure.bind(this)
             );
         }
-
-    };
+    }
 
     createNeonFilterClauseEquals(databaseAndTableName: { table: string, database: string }, _fieldName: string) {
         let table = databaseAndTableName.table;
@@ -278,7 +277,7 @@ export class FilterBuilderComponent extends BaseNeonComponent implements OnInit,
             return neon.query.and.apply(neon.query, filterClauses);
         }
         return neon.query.or.apply(neon.query, filterClauses);
-    };
+    }
 
     getNeonFilterFields(): string[] {
         //TODO
@@ -302,7 +301,7 @@ export class FilterBuilderComponent extends BaseNeonComponent implements OnInit,
     createQuery(): neon.query.Query {
         //Don't query
         return null;
-    };
+    }
 
     getFiltersToIgnore() {
         //Don't query
@@ -320,16 +319,16 @@ export class FilterBuilderComponent extends BaseNeonComponent implements OnInit,
 
     handleFiltersChangedEvent() {
         //Do nothing
-    };
+    }
 
     getFilterText(_filter): string {
         //Do nothing, no filters
         return '';
-    };
+    }
 
     removeFilter(_value: string): void {
         //Do nothing, no filters
-    };
+    }
 
     handleValueChange(_event, i) {
         if (this.active.whereClauses[i].value && this.active.whereClauses[i].value !== '') {
@@ -345,11 +344,11 @@ export class FilterBuilderComponent extends BaseNeonComponent implements OnInit,
 
     handleChangeField() {
         this.logChangeAndStartQueryChain(); // ('dataField', this.active.dataField.columnName);
-    };
+    }
 
     handleChangeOperator() {
         this.logChangeAndStartQueryChain(); // ('dataField', this.active.dataField.columnName);
-    };
+    }
 }
 
 export class OperatorMetaData {

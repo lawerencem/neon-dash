@@ -90,7 +90,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
         // Make sure the empty field has non-null values
         this.emptyField.columnName = '';
         this.emptyField.prettyName = '';
-    };
+    }
 
     /**
      * Initializes the visualization.
@@ -122,7 +122,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
         this.exportId = (this.isExportable ? this.exportService.register(this.doExport) : null);
         this.initializing = false;
         this.postInit();
-    };
+    }
 
     /**
      * Method for anything that needs to be done once the visualization has been initialized
@@ -277,7 +277,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
         }
 
         return finalObject;
-    };
+    }
 
     /**
      * Get a query ready to give to the ExportService.
@@ -292,15 +292,15 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
             console.log('SKIPPING EXPORT FOR ' + this.getVisualizationName());
             return null;
         }
-    };
+    }
 
     doExport() {
         return this.export();
-    };
+    }
 
     protected enableRedrawAfterResize(enable: boolean) {
         this.redrawAfterResize = enable;
-    };
+    }
 
     onResizeStop() {
         if (this.redrawAfterResize) {
@@ -319,11 +319,11 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
         this.exportService.unregister(this.exportId);
         this.visualizationService.unregister(this.id);
         this.subNgOnDestroy();
-    };
+    }
 
     initData() {
         this.addEmptyLayer();
-    };
+    }
 
     /**
      * Initialize the database metadata for a layer
@@ -345,7 +345,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
 
             this.initTables(layerIndex);
         }
-    };
+    }
 
     /**
      * Initialize the table metadata for a layer
@@ -366,7 +366,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
             }
             this.initFields(layerIndex);
         }
-    };
+    }
 
     /**
      * Initialize the field metadata for a layer
@@ -386,7 +386,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
 
         this.onUpdateFields(layerIndex);
         //this.changeDetection.detectChanges();
-    };
+    }
 
     /**
      * Called when any field metadata changes.
@@ -463,7 +463,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
                 console.log('filter failed to set');
             });
         this.changeDetection.detectChanges();
-    };
+    }
 
     /**
      * Create a title for a query
@@ -514,7 +514,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
                 : '');
         }
         return title;
-    };
+    }
 
     /**
     This is expected to get called whenever a query is expected to be run.
@@ -647,15 +647,15 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
                 this.changeDetection.detectChanges();
             }
         });
-    };
+    }
 
     /**
      * Get field object from the key into the config options
      */
     findFieldObject(layerIndex: number, bindingKey: string, mappingKey?: string): FieldMetaData {
         let find = (name: string) => {
-            return _.find(this.meta.layers[layerIndex].fields, function(field) {
-                return field['columnName'] === name;
+            return _.find(this.meta.layers[layerIndex].fields, function(fieldMD) {
+                return fieldMD['columnName'] === name;
             });
         };
 
@@ -669,7 +669,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
         }
 
         return field || this.datasetService.createBlankField();
-    };
+    }
 
     /**
      * Get a blank FieldMetaData object
@@ -680,7 +680,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
 
     getMapping(layerIndex, key: string): string {
         return this.datasetService.getMapping(this.meta.layers[layerIndex].database.name, this.meta.layers[layerIndex].table.name, key);
-    };
+    }
 
     /**
      * Called after the filters in the filter service have changed.
@@ -713,7 +713,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
     handleChangeDatabase(layerIndex) {
         this.initTables(layerIndex);
         this.logChangeAndStartQueryChain(layerIndex); // ('database', this.active.database.name);
-    };
+    }
 
     /**
      * Handles changes in the active table
@@ -721,7 +721,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
     handleChangeTable(layerIndex) {
         this.initFields(layerIndex);
         this.logChangeAndStartQueryChain(layerIndex); // ('table', this.active.table.name);
-    };
+    }
 
     /**
      * If not initializing, calls executeQueryChain();
@@ -740,7 +740,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
         if (!this.initializing) {
             this.executeQueryChain(layerIndex);
         }
-    };
+    }
 
     /**
      * Called when a filter has been removed
@@ -777,7 +777,7 @@ export abstract class BaseLayeredNeonComponent implements OnInit,
                 console.error('error removing filter');
             }, this.messenger);
         this.changeDetection.detectChanges();
-    };
+    }
 
     getButtonText() {
         return '';

@@ -107,23 +107,23 @@ export class DataTableComponent extends BaseNeonComponent implements OnInit,
         };
         this.queryTitle = 'Raw Data';
         this.enableRedrawAfterResize(true);
-    };
+    }
 
     subNgOnInit() {
         //Do nothing
-    };
+    }
 
     postInit() {
         this.executeQueryChain();
-    };
+    }
 
     subNgOnDestroy() {
         //Do nothing
-    };
+    }
 
     getOptionFromConfig(field) {
         return this.optionsFromConfig[field];
-    };
+    }
 
     subGetBindings(bindings: any) {
         bindings.sortField = this.active.sortField.columnName;
@@ -139,7 +139,7 @@ export class DataTableComponent extends BaseNeonComponent implements OnInit,
             numHeaders++;
         }
         this.recalculateActiveHeaders();
-    };
+    }
 
     recalculateActiveHeaders() {
         this.active.activeHeaders = this.getActiveHeaders();
@@ -155,7 +155,7 @@ export class DataTableComponent extends BaseNeonComponent implements OnInit,
             }
         }
         return active;
-    };
+    }
 
     getExportFields() {
         return this.active.headers
@@ -176,7 +176,7 @@ export class DataTableComponent extends BaseNeonComponent implements OnInit,
 
     logAndDisplay(obj) {
         console.log(obj);
-    };
+    }
 
     addLocalFilter(key, value, prettyKey) {
         this.filters[0] = {
@@ -184,7 +184,7 @@ export class DataTableComponent extends BaseNeonComponent implements OnInit,
             value: value,
             prettyKey: prettyKey
         };
-    };
+    }
 
     createNeonFilterClauseEquals(_databaseAndTableName: {}, fieldName: string) {
         let filterClauses = this.filters.map(function(filter) {
@@ -197,7 +197,7 @@ export class DataTableComponent extends BaseNeonComponent implements OnInit,
             return neon.query.and.apply(neon.query, filterClauses);
         }
         return neon.query.or.apply(neon.query, filterClauses);
-    };
+    }
 
     getNeonFilterFields(): string[] {
         return [this.active.sortField.columnName];
@@ -239,7 +239,7 @@ export class DataTableComponent extends BaseNeonComponent implements OnInit,
 
         //let dataField = this.active.dataField.columnName;
         return query.where(whereClause).sortBy(this.active.sortField.columnName, neon.query['DESCENDING']).limit(this.active.limit);
-    };
+    }
 
     getFiltersToIgnore() {
         return null;
@@ -284,7 +284,7 @@ export class DataTableComponent extends BaseNeonComponent implements OnInit,
             if (!obj) {
                 return undefined;
             }
-        };
+        }
         return obj;
     }
 
@@ -324,7 +324,7 @@ export class DataTableComponent extends BaseNeonComponent implements OnInit,
     handleFiltersChangedEvent() {
 
         this.executeQueryChain();
-    };
+    }
 
     handleChangeLimit() {
         this.logChangeAndStartQueryChain();
@@ -332,7 +332,7 @@ export class DataTableComponent extends BaseNeonComponent implements OnInit,
 
     handleChangeSortField() {
         this.logChangeAndStartQueryChain(); // ('dataField', this.active.dataField.columnName);
-    };
+    }
 
     isDragging(): boolean {
         return (this.drag.mousedown && this.drag.downIndex >= 0);
@@ -422,19 +422,19 @@ export class DataTableComponent extends BaseNeonComponent implements OnInit,
             return filter.value;
         });
         return closeableFilters;
-    };
+    }
 
     getFilterTitle(value: string) {
         return this.active.sortField.columnName + ' = ' + value;
-    };
+    }
 
     getFilterCloseText(value: string) {
         return value;
-    };
+    }
 
     getRemoveFilterTooltip(value: string) {
         return 'Delete Filter ' + this.getFilterTitle(value);
-    };
+    }
 
     unsharedFilterChanged() {
         // Update the data

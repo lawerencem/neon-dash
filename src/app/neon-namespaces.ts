@@ -14,8 +14,8 @@
  *
  */
 /* eslist-disable */
-export namespace charts { };
-export namespace mediators { };
+export namespace charts { }
+export namespace mediators { }
 
 export namespace neonColors {
     export const GREEN = '#39b54a';
@@ -117,7 +117,7 @@ export namespace neonMappings {
     export const MAX_LON = 'maxLon';
     export const BOUNDS = 'bounds';
     export const POINT = 'point';
-};
+}
 
 export namespace neonWizard {
     export namespace mappings {
@@ -375,7 +375,7 @@ neonWizard.visualizationBindings['timeline-selector'] = [
 export namespace neonVisualizationMinPixel { // jshint ignore:line
     export const x = 320;
     export const y = 240;
-};
+}
 
 export const neonVisualizations: any[] = [
     //    {   // jshint ignore:line
